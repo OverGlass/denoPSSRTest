@@ -1,4 +1,4 @@
-# denoSSRTest
+# denoPSSRTest
 Test Progressive Rendering With deno.land/Oak
 
 It should Serve a HTML chunk each 100ms but request take 1200ms and everything appear.
