@@ -42,9 +42,12 @@ async function $progressiveRendering(conn: Deno.Conn) {
       conn.closeWrite();
     },
   };
-
-  for await (const method of Object.values(sendMethods)) {
-    await method();
+  try {
+    for await (const method of Object.values(sendMethods)) {
+      await method();
+    }
+  } catch (e) {
+    console.log(e);
   }
 
   async function writeAndEncodeString(el: string) {
