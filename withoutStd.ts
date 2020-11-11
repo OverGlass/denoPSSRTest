@@ -18,7 +18,7 @@ async function $progressiveRendering(conn: Deno.Conn) {
   const xmlChunks = [
     "<h1>Hello world 1</h1>",
     "<h2>There is a fake latency of 1second on each chunk</h2>",
-    `<h2><button id="testScript">reactivity before html fully loaded</button></h2>
+    `<button id="testScript">reactivity before html fully loaded</button>
     <script>
         const button = document.querySelector("#testScript")
         const h2 = document.querySelector("h2")
