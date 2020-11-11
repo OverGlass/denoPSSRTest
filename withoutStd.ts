@@ -12,8 +12,8 @@ async function $progressiveRendering(conn: Deno.Conn) {
     "HTTP/1.1 200 OK",
     "cache-Control : no-cache",
     "content-type : text/html; charset=utf-8",
-    "connection: close",
-    "Transfer-Encoding :chunked",
+    "connection: keep-alive",
+    "Transfer-Encoding : chunked",
   ];
   const xmlChunks = [
     "<h1>Hello world 1</h1>",
@@ -21,13 +21,13 @@ async function $progressiveRendering(conn: Deno.Conn) {
     "<h3>Hello world 3</h3>",
   ];
 
-  const openHTML = "<html><body>";
-  const closeHTML = "</body></html>";
+  const openHTMLtags = "<html><body>";
+  const closeHTMLtags = "</body></html>";
 
   const sendMethods = {
     sendFirstChunk: async () => {
       await writeAndEncodeString(
-        [...headers, "", chunk(openHTML)].join("\r\n")
+        [...headers, "", chunk(openHTMLtags)].join("\r\n")
       );
     },
     sendXmlChunks: async () => {
@@ -37,7 +37,7 @@ async function $progressiveRendering(conn: Deno.Conn) {
       }
     },
     sendLastChunk: async () => {
-      await writeAndEncodeString(chunk(closeHTML));
+      await writeAndEncodeString(chunk(closeHTMLtags));
       await writeAndEncodeString(chunk(""));
       conn.closeWrite();
     },
