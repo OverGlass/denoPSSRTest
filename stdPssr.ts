@@ -1,5 +1,4 @@
-import { serve } from "https://deno.land/std@0.76.0/http/server.ts";
-import type { ServerRequest } from "https://deno.land/std@0.76.0/http/server.ts";
+import { serve, ServerRequest } from "./../deno/std/http/server.ts";
 import { encode } from "https://deno.land/std@0.73.0/encoding/utf8.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
