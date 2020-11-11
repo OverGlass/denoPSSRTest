@@ -27,17 +27,17 @@ async function $progressiveRendering(conn: Deno.Conn) {
   const sendMethods = {
     sendFirstChunk: async () => {
       await writeAndEncodeString(
-        [...headers, "", chunk(openHTML + "\n")].join("\r\n")
+        [...headers, "", chunk(openHTML)].join("\r\n")
       );
     },
     sendXmlChunks: async () => {
       for await (const s of xmlChunks) {
         await delay(1000);
-        await writeAndEncodeString(chunk(s + "\n"));
+        await writeAndEncodeString(chunk(s));
       }
     },
     sendLastChunk: async () => {
-      await writeAndEncodeString(chunk(closeHTML + "\n"));
+      await writeAndEncodeString(chunk(closeHTML));
       await writeAndEncodeString(chunk(""));
       conn.closeWrite();
     },
