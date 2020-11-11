@@ -17,8 +17,27 @@ async function $progressiveRendering(conn: Deno.Conn) {
   ];
   const xmlChunks = [
     "<h1>Hello world 1</h1>",
-    "<h2>Hello world 2</h2>",
-    "<h3>Hello world 3</h3>",
+    `<h2><button id="testScript">reactivity before all html load</button></h2>
+    <script>
+        const button = document.querySelector("#testScript")
+        const h2 = document.querySelector("h2")
+        button.addEventListener("click", transform)
+        function transform(e) {
+            h2.innerText = "Still loading, but we have reactvity :)"
+        }
+    </script>
+    `,
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Hello world</h3>",
+    "<h3>Welcome to Progressive Server Side Rendering !</h3>",
   ];
 
   const openHTMLtags = "<html><body>";
